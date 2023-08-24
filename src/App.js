@@ -93,11 +93,9 @@ const App = () => {
       confirmButtonColor: 'red',
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log(timer);
         setOpenModal(true);
         setIsInputDisabled(true);
         setIsVisible(false);
-        // clearInterval(interval);
       }
       else {
         setOpenModal(false);
@@ -108,19 +106,15 @@ const App = () => {
     });
 
   }
-  // const handleGameStart = () => {
-  //   setGameStart(true);
-  // };
+  
 
   useEffect(() => {
-    console.log(gameStart);
     if(gameStart){
       const interval = setInterval(() => {
         if ((timer === 0 || data.length > 0 ) && (wrongCount + correctCount === data.length)) {
           setOpenModal(true);
           setIsInputDisabled(true);
           setIsVisible(false);
-          console.log(data.length);
           clearInterval(interval);
         }
         else {
@@ -140,7 +134,6 @@ const App = () => {
   const handleGetData = async (props) => {
     const docRef = doc(db, "DailyQA", date);
     const datafromdb = await getDoc(docRef);
-    console.log(datafromdb.data().data);
     setLetters(datafromdb.data().data.map((item) => {
       return item.letter;
     }));
@@ -157,16 +150,12 @@ const App = () => {
 
   const isLetterStored = () => {
 
-    console.log(answersStatus);
-    console.log(letters[currentLetterIndex]);
-    console.log(Object.keys(answersStatus));
+    
     Object.keys(answersStatus).forEach(element => {
       if (element === letters[currentLetterIndex] && answersStatus[element] === 'skipped') {
-        console.log("eşit");
         return true;
       }
       else {
-        console.log("eşitdeğil");
         return false;
       }
     });
@@ -240,15 +229,13 @@ const App = () => {
     const passedObjects = filterObjectsByValue(answersStatus, 'skipped');
 
     if (data.length > 0 && correctCount + passedCount + wrongCount === data.length && Object.keys(passedObjects).length !== 0) {
-      console.log("buraya geldi");
-      console.log(passedObjects);
+    
       if (passedCount > 0) {
         let temparr = Object.keys(passedObjects);
         let firstRun = false;
 
         temparr.forEach(element => {
           if (firstRun = false) {
-            console.log(findIndex(element));
             // setCurrentLetterIndex((prevStatus) => {
             //   findIndex(element);
 
@@ -261,8 +248,7 @@ const App = () => {
           }
 
         });
-        console.log(temparr);
-        console.log(answersStatus);
+       
 
 
 

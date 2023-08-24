@@ -179,23 +179,21 @@ a {
   background-color: #3dd300;
   color: white;
   animation: rotate 2s linear infinite;
-  animation-iteration-count: 1;
-  /* Start with animation paused */
+  animation-iteration-count: 10;
 }
 
 .wrong {
   background-color: #d30000;
   color: white;
   animation: rotate 2s linear infinite;
-  animation-iteration-count: 1;
-  /* Start with animation paused */
+  animation-iteration-count: 10;
 }
 
 .skipped {
   background-color: #f7b500;
   color: white;
   animation: rotate 2s linear infinite;
-  animation-iteration-count: 1;
+  animation-iteration-count: 10;
 }
 
 @keyframes rotate {

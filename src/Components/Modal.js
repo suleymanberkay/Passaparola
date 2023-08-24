@@ -7,8 +7,7 @@ import 'react-tabs/style/react-tabs.css';
 const Modal = ({ closeModal, correctCount, wrongCount, passedCount, answersStatus, data }) => {
   
   useEffect(() => {
-    console.log(data);
-    console.log(answersStatus);
+    
   }, [answersStatus,data])
   return (
     <div className='modalBackground'>

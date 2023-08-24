@@ -32,21 +32,16 @@ const Add = () => {
 
 
   const handleSendData = async () => {
-    console.log('asd');
-    console.log(date);
-    console.log(dailyData);
+   
     if (TURKISH_LETTERS.length === dailyData.length) {
       try {
         await setDoc(doc(collectionRef, date.toString()), {
           data: dailyData,
         });
-        console.log("Document written with ID: ", customDocID);
       } catch (e) {
         console.error("Error adding document: ", e);
       }
-      console.log('uygun');
     } else {
-      console.log('veriler eksik');
     }
   };
 
@@ -54,51 +49,33 @@ const Add = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // setDailyData((prevData) => ({
-    //   ...prevData,
-    //   [letter]: {
-    //     ...prevData[letter],
-    //   },
-    // }));
+   
     let hasSameLetter = false;
-    console.log(dailyData);
     dailyData.forEach((element) => {
 
-      console.log(element);
-      console.log(selectedLetter);
       if (element.letter === selectedLetter) {
         let filteredArray = dailyData.filter((el) => {
           return el.letter !== selectedLetter;
         })
-        console.log(filteredArray);
         let preparedArray = [...filteredArray, {
           letter: selectedLetter, question: question, answer: answer
         }]
         hasSameLetter = true;
         setDailyData(preparedArray);
-        console.log("bu harfe veri eklendi");
       }
       else {
-        console.log("yeni veri eklendi");
       }
     })
 
-    // if (dailyData[selectedLetter]) {
-    //   console.log(`"${selectedLetter}" harfine zaten veri eklenmiş.`);
-    //   return;
-    // }
     if (hasSameLetter === false) {
       setDailyData((prevData) => [
         ...prevData,
         { letter: selectedLetter, question: question, answer: answer },
       ]);
     }
-    console.log({ letter: selectedLetter, question: question, answer: answer }
-    );
+    
 
-    // Resetleme
-    // setSelectedLetter(letters[0]);
-    console.log(selectedLetter);
+   
     setQuestion('');
     setAnswer('');
 

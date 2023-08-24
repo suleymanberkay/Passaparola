@@ -4,8 +4,7 @@ import './Login.css';
 const Login = ({ closeLogin }) => {
 
     const [parola, setParola] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
-
+    
     const handleParolaChange = (event) => {
         setParola(event.target.value);
     };

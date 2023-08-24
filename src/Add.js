@@ -18,7 +18,7 @@ const Add = () => {
 
   };
 
-  const [letters, setLetters] = useState(TURKISH_LETTERS);
+  const [letters] = useState(TURKISH_LETTERS);
   const [dailyData, setDailyData] = useState([]);
   const [selectedLetter, setSelectedLetter] = useState(letters[0]);
   const [question, setQuestion] = useState('');

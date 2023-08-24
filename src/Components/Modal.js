@@ -9,7 +9,7 @@ const Modal = ({ closeModal, correctCount, wrongCount, passedCount, answersStatu
   useEffect(() => {
     console.log(data);
     console.log(answersStatus);
-  }, [])
+  }, [answersStatus,data])
   return (
     <div className='modalBackground'>
       <div className='modalContainer'>

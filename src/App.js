@@ -68,7 +68,7 @@ const App = () => {
         angle += angleIncrement;
       }
     }
-  }, [numComponents]);
+  }, [numComponents,circleRadius]);
   // useEffect(() => {
   //   const interval = setInterval(() => {
   //     if (timer !== 0) {
@@ -108,15 +108,15 @@ const App = () => {
     });
 
   }
-  const handleGameStart = () => {
-    setGameStart(true);
-  };
+  // const handleGameStart = () => {
+  //   setGameStart(true);
+  // };
 
   useEffect(() => {
     console.log(gameStart);
     if(gameStart){
       const interval = setInterval(() => {
-        if (timer === 0 || data.length > 0 && wrongCount + correctCount === data.length) {
+        if ((timer === 0 || data.length > 0 ) && (wrongCount + correctCount === data.length)) {
           setOpenModal(true);
           setIsInputDisabled(true);
           setIsVisible(false);
@@ -135,7 +135,7 @@ const App = () => {
 
 
 
-  }, [gameStart,timer]);
+  }, [gameStart,timer,correctCount,data.length,wrongCount]);
 
   const handleGetData = async (props) => {
     const docRef = doc(db, "DailyQA", date);
@@ -175,7 +175,6 @@ const App = () => {
 
   const checkAnswer = () => {
 
-    let result = isLetterStored();
 
     const userAnswerLowerCase = (typeof userAnswer === 'string') ? userAnswer.toLowerCase() : '';
     const correctAnswer = getAnswer();
@@ -219,7 +218,7 @@ const App = () => {
   }
   useEffect(() => {
     handleGetData();
-  }, [])
+  }, [handleGetData()])
 
 
   const findIndex = (item) => {

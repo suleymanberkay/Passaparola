@@ -1,0 +1,207 @@
+.modalBackground {
+    width: 100vw;
+    height: 100vh;
+    background-color: #ffffff;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+
+}
+
+.modalContainer {
+    width: 30%;
+    height: 90%;
+    background-color: rgb(235, 123, 123);
+    border: 1px solid rgb(240, 6, 6);
+    display: flex;
+    border-radius: 12px;
+    flex-direction: column;
+    padding: 2%;
+    max-height: 550px;
+    overflow-y: auto;
+}
+
+.modalContainer::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modalContainer::-webkit-scrollbar-thumb {
+    background-color: #f7b500;
+}
+
+.modalContainer::-webkit-scrollbar-track {
+    background-color: rgb(235, 123, 123);
+}
+
+.tabList {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+}
+
+.tabList:hover {
+    color: #ffffff;
+}
+
+.solutionCard {
+    width: 10% !important;
+    color: #f7b500 !important;
+}
+
+.card {
+    width: 1000% !important;
+    background-color: rgb(235, 123, 123) !important;
+    border: 1px solid #ffffff !important;
+}
+
+.cardText {
+    background-color: none;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.modalContainer .title {
+    display: inline-block;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.modalContainer .title h1 {
+    color: white;
+    font-weight: bold;
+}
+
+.modalContainer .body {
+    color: rgb(255, 253, 253);
+    flex: 50%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.7rem;
+    text-align: center;
+}
+
+.texts {
+    color: #f9f9f9;
+    font-weight: bold;
+}
+
+.value {
+    color: #ffffff;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.gg-check-o {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: green;
+    background-color: rgb(161, 253, 158);
+}
+
+.gg-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(249, 14, 14);
+    border: 1px solid rgb(240, 6, 6);
+    background-color: rgb(235, 123, 123);
+
+}
+
+.gg-shape-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #f7b500;
+    background-color: #f7b500;
+    border: 1px solid #f7b500;
+}
+
+.modalContainer .footer {
+    flex: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalContainer .footer button {
+    width: 20%;
+    height: 7%;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#cancelBtn {
+    font-weight: bold;
+    font-size: 18px;
+    background-color: #f7b500;
+    position: absolute;
+    bottom: 15%;
+}
+
+
+@media (max-width: 460px) {
+    .modalContainer {
+        width: 65%;
+        height: 75%;
+    }
+
+    .modalContainer .footer button {
+        width: 30%;
+        height: 6%;
+    }
+
+    .texts {
+        font-size: 20px;
+    }
+
+    .modalContainer .title h1 {
+        font-size: 26px;
+    }
+
+    #cancelBtn {
+        font-size: 18px;
+        bottom: 20%;
+    }
+}
+
+@media (min-width: 460px) and (max-width: 650px) {
+    .modalContainer {
+        width: 65%;
+        height: 75%;
+    }
+
+    #cancelBtn {
+        font-size: 20px;
+        bottom: 15%;
+    }
+}
+
+@media (min-width: 650px) and (max-width: 1024px) {
+    .modalContainer {
+        width: 65%;
+        height: 80%;
+    }
+
+    #cancelBtn {
+        font-size: 20px;
+        bottom: 15%;
+    }
+}

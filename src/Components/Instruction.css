@@ -1,0 +1,98 @@
+.instructionBackground {
+    width: 100vw;
+    height: 100vh;
+    background-color: #ffffff;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+}
+
+.instructionContainer {
+    position: relative;
+    width: 40%;
+    height: 75%;
+    background-color: rgb(235, 123, 123);
+    border: 1px solid rgb(240, 6, 6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    box-shadow: rgb(1, 1, 255);
+    flex-direction: column;
+    padding: 25px;
+}
+
+.textBody {
+    height: 90%;
+}
+
+.startBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 18px;
+    background-color: #f7b500;
+    color: #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 50%;
+    position: absolute;
+    bottom: 3%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.backBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 40px;
+    background-color: #f7b500;
+    color: #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 50%;
+}
+
+
+@media (max-width: 460px) {
+    .instructionContainer {
+        height: 85%;
+        width: 70%;
+    }
+
+
+    .textInstruction {
+        font-size: 17px;
+    }
+    .startBtn {
+        height: 8%;}
+
+}
+
+@media (min-width: 460px) and (max-width: 576px) {
+    .instructionContainer {
+        height: 85%;
+        width: 80%;
+    }
+
+
+
+}
+
+@media (min-width: 576px) and (max-width: 1024px) {
+    .instructionContainer {
+        height: 85%;
+        width: 80%;
+    }
+
+
+
+}

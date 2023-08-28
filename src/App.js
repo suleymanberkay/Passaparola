@@ -31,7 +31,7 @@ const App = () => {
   const [currentLetterIndex, setCurrentLetterIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [userAnswer, setUserAnswer] = useState('');
-  const [timer, setTimer] = useState(3000);
+  const [timer, setTimer] = useState(300);
   const [answersStatus, setAnswersStatus] = useState({});
   const isMobile = window.innerWidth <= 768;
   const circleRadius = isMobile ? circleRadiusMobile : circleRadiusDesktop;
@@ -46,7 +46,7 @@ const App = () => {
   let remainingMinutes = 60 - currentMinute;
   if (remainingMinutes.toString().length === 1) {
     remainingMinutes = '0' + remainingMinutes.toString();
-  } 
+  }
   let remainingSecond = 60 - currentSecond;
   if (remainingSecond.toString().length === 1) {
     remainingSecond = '0' + remainingSecond.toString();
@@ -68,7 +68,7 @@ const App = () => {
         angle += angleIncrement;
       }
     }
-  }, [numComponents,circleRadius]);
+  }, [numComponents, circleRadius]);
   // useEffect(() => {
   //   const interval = setInterval(() => {
   //     if (timer !== 0) {
@@ -106,30 +106,30 @@ const App = () => {
     });
 
   }
-  
+
 
   useEffect(() => {
-    if(gameStart){
+    if (gameStart) {
       const interval = setInterval(() => {
-        if ((timer === 0 || data.length > 0 ) && (wrongCount + correctCount === data.length)) {
+        if ((timer === 0 || data.length > 0) && (wrongCount + correctCount === data.length)) {
           setOpenModal(true);
           setIsInputDisabled(true);
           setIsVisible(false);
           clearInterval(interval);
         }
         else {
-           
+
           setTimer((prevTimer) => prevTimer - 1);
         }
-  
+
       }, 1000);
       return () => clearInterval(interval);
     }
-    
 
 
 
-  }, [gameStart,timer,correctCount,data.length,wrongCount]);
+
+  }, [gameStart, timer, correctCount, data.length, wrongCount]);
 
   const handleGetData = async (props) => {
     const docRef = doc(db, "DailyQA", date);
@@ -148,70 +148,141 @@ const App = () => {
     return data[currentLetterIndex]?.question;
   };
 
-  const isLetterStored = () => {
+  // const isLetterStored = () => {
 
-    
-    Object.keys(answersStatus).forEach(element => {
-      if (element === letters[currentLetterIndex] && answersStatus[element] === 'skipped') {
-        return true;
-      }
-      else {
-        return false;
-      }
-    });
-  }
 
+  //   Object.keys(answersStatus).forEach(element => {
+  //     if (element === letters[currentLetterIndex] && answersStatus[element] === 'skipped') {
+  //       return true;
+  //     }
+  //     else {
+  //       return false;
+  //     }
+  //   });
+  // }
+
+  const [skippedLetters, setSkippedLetters] = useState([]);
+  const [firstRoundCompleted, setFirstRoundCompleted] = useState(false);
 
   const checkAnswer = () => {
-
-
     const userAnswerLowerCase = (typeof userAnswer === 'string') ? userAnswer.toLowerCase() : '';
     const correctAnswer = getAnswer();
+    const currentLetter = letters[currentLetterIndex];
+
     if (userAnswerLowerCase === correctAnswer?.toLowerCase()) {
       setAnswersStatus((prevStatus) => ({
         ...prevStatus,
-        [letters[currentLetterIndex]]: 'correct',
+        [currentLetter]: 'correct',
       }));
       setCorrectCount((prevStatus) => (prevStatus + 1));
       setScore(score + 10);
-    } else if (userAnswerLowerCase === 'pas') {
+    }
+    else if (userAnswerLowerCase === 'pas') {
+      if (!skippedLetters.includes(letters[currentLetterIndex])) {
+        setSkippedLetters([...skippedLetters, letters[currentLetterIndex]]);
+      }
       setAnswersStatus((prevStatus) => ({
         ...prevStatus,
-        [letters[currentLetterIndex]]: 'skipped',
+        [currentLetter]: 'skipped',
       }));
       setPassedCount((prevStatus) => (prevStatus + 1));
-    }
-    // if (userAnswerLowerCase === '') {
-    // setAnswersStatus((prevStatus) => ({
-    //   ...prevStatus,
-    //   [letters[currentLetterIndex]]: 'skipped',
-    // }));
-    // setPassedCount((prevStatus) => (prevStatus + 1));
-    // }
-    else {
+    } else {
       setAnswersStatus((prevStatus) => ({
         ...prevStatus,
-        [letters[currentLetterIndex]]: 'wrong',
+        [currentLetter]: 'wrong',
       }));
       setWrongCount((prevStatus) => (prevStatus + 1));
       setScore(score - 10);
     }
 
-    //   if(correctCount+wrongCount===data.length){  
-    setCurrentLetterIndex((prevStatus) =>
-      (prevStatus + 1) % data.length);
-    // }
+    // Sıradaki harfi belirle
+    let nextLetterIndex;
 
+    if (skippedLetters.length > 0 && firstRoundCompleted) {
+      nextLetterIndex = letters.findIndex(letter => letter === skippedLetters[0]);
+      const skippedLetterIndexes = skippedLetters.slice(1).map(letter => letters.findIndex(l => l === letter));
+      if (skippedLetterIndexes.length > 0) {
+        // Birden fazla yoksayması gereken harf varsa, en son yoksanan harf indisine git
+        nextLetterIndex = skippedLetterIndexes[skippedLetterIndexes.length - 1];
+        setSkippedLetters([]); // Tüm atlanan harfleri temizle
+      } else {
+        setSkippedLetters(skippedLetters.slice(1)); // İlk harfi çıkar
+      }
+    } else {
+      nextLetterIndex = (currentLetterIndex + 1) % letters.length;
+      while (answersStatus[letters[nextLetterIndex]] === 'correct' || answersStatus[letters[nextLetterIndex]] === 'wrong') {
+        nextLetterIndex = (nextLetterIndex + 1) % letters.length; // Doğru veya yanlış olan harfi yoksay
+      }
+    }
 
+    if (!firstRoundCompleted && nextLetterIndex === 0) {
+      setFirstRoundCompleted(true);
+    }
+
+    setCurrentLetterIndex(nextLetterIndex);
     setUserAnswer('');
-  }
+  };
+
+
+
+
+
+
+
+
+
+
+
+  // const checkAnswer = () => {
+
+
+  //   const userAnswerLowerCase = (typeof userAnswer === 'string') ? userAnswer.toLowerCase() : '';
+  //   const correctAnswer = getAnswer();
+  //   if (userAnswerLowerCase === correctAnswer?.toLowerCase()) {
+  //     setAnswersStatus((prevStatus) => ({
+  //       ...prevStatus,
+  //       [letters[currentLetterIndex]]: 'correct',
+  //     }));
+  //     setCorrectCount((prevStatus) => (prevStatus + 1));
+  //     setScore(score + 10);
+  //   } else if (userAnswerLowerCase === 'pas') {
+  //     setAnswersStatus((prevStatus) => ({
+  //       ...prevStatus,
+  //       [letters[currentLetterIndex]]: 'skipped',
+  //     }));
+  //     setPassedCount((prevStatus) => (prevStatus + 1));
+  //   }
+  //   // if (userAnswerLowerCase === '') {
+  //   // setAnswersStatus((prevStatus) => ({
+  //   //   ...prevStatus,
+  //   //   [letters[currentLetterIndex]]: 'skipped',
+  //   // }));
+  //   // setPassedCount((prevStatus) => (prevStatus + 1));
+  //   // }
+  //   else {
+  //     setAnswersStatus((prevStatus) => ({
+  //       ...prevStatus,
+  //       [letters[currentLetterIndex]]: 'wrong',
+  //     }));
+  //     setWrongCount((prevStatus) => (prevStatus + 1));
+  //     setScore(score - 10);
+  //   }
+
+  //   //   if(correctCount+wrongCount===data.length){  
+  //   setCurrentLetterIndex((prevStatus) =>
+  //     (prevStatus + 1) % data.length);
+  //   // }
+
+
+  //   setUserAnswer('');
+  // }
   useEffect(() => {
     handleGetData();
   }, [handleGetData()])
 
 
   const findIndex = (item) => {
-    const lettersIndex = 'ABCÇDEFGHIİJKLMNOÖPRSTUÜVXYZ';
+    const lettersIndex = 'ABCÇDEFGHIİJKLMNOÖPRSTUÜVYZ';
     return lettersIndex.indexOf(item);
   };
 
@@ -225,37 +296,37 @@ const App = () => {
       }, {});
   }
 
-  useEffect(() => {
-    const passedObjects = filterObjectsByValue(answersStatus, 'skipped');
+  // useEffect(() => {
+  //   const passedObjects = filterObjectsByValue(answersStatus, 'skipped');
 
-    if (data.length > 0 && correctCount + passedCount + wrongCount === data.length && Object.keys(passedObjects).length !== 0) {
-    
-      if (passedCount > 0) {
-        let temparr = Object.keys(passedObjects);
-        let firstRun = false;
+  //   if (data.length > 0 && correctCount + passedCount + wrongCount === data.length && Object.keys(passedObjects).length !== 0) {
 
-        temparr.forEach(element => {
-          if (firstRun = false) {
-            // setCurrentLetterIndex((prevStatus) => {
-            //   findIndex(element);
+  //     if (passedCount > 0) {
+  //       let temparr = Object.keys(passedObjects);
+  //       let firstRun = false;
 
-            // })
-            firstRun = true;
-            checkAnswer();
-          }
-          else {
-            return true;
-          }
+  //       temparr.forEach(element => {
+  //         if (firstRun = false) {
+  //           // setCurrentLetterIndex((prevStatus) => {
+  //           //   findIndex(element);
 
-        });
-       
+  //           // })
+  //           firstRun = true;
+  //           checkAnswer();
+  //         }
+  //         else {
+  //           return true;
+  //         }
 
+  //       });
 
 
-      }
-    }
 
-  }, [correctCount, wrongCount, passedCount, currentLetterIndex, answersStatus, letters])
+
+  //     }
+  //   }
+
+  // }, [correctCount, wrongCount, passedCount, currentLetterIndex, answersStatus, letters])
 
 
   const handleKeyPress = (event) => {
@@ -265,17 +336,27 @@ const App = () => {
   };
   const isPlayed = localStorage.getItem('isPlayed');
   if (isPlayed) {
-      if (remainingHours === 0 && remainingMinutes === 0) {
+    if (remainingHours === 0 && remainingMinutes === 0) {
 
-        localStorage.setItem('isPlayed', false);
-      } else {
-        return (
-          <div> Kalan süre: {remainingHours} : {remainingMinutes} : {remainingSecond}</div>
-        )
-      }
-      setInterval(isPlayed, 1000);
-      window.onload = isPlayed;
-    
+      localStorage.setItem('isPlayed', false);
+    } else {
+      return (
+        <div>
+          <div className='designBy'>
+            <p className='designByText'>Tekrar oynayabilmeniz için geri kalan süre: {remainingHours} : {remainingMinutes} : {remainingSecond}</p>
+          </div>
+          <div className='designBy'>
+            <p className='designByText'>Süleyman Berkay Yılmaz tarafından tasarlandı</p>
+            <i class="fa-brands fa-linkedin">www.linkedin.com/in/suleymanberkayyilmaz</i>
+            <i class="fa-brands fa-square-instagram">@slymnylmz14</i>
+            <i class="fa-brands fa-square-twitter">@slymnylmz14</i>
+          </div>
+        </div>
+      )
+    }
+    setInterval(isPlayed, 1000);
+    window.onload = isPlayed;
+
 
 
   }
@@ -287,13 +368,13 @@ const App = () => {
   return (
 
     <div className="circle-letter">
-      {openInstruction && <Instruction closeInstruction={setOpenInstruction} playGame={setGameStart} gameStart={gameStart}/>}
-      
-      <NavBar 
+      {openInstruction && <Instruction closeInstruction={setOpenInstruction} playGame={setGameStart} gameStart={gameStart} />}
+
+      <NavBar
         title="User App"
         buttonContainer="app"
-        iconButton="" 
-        gameStart={gameStart}/>
+        iconButton=""
+        gameStart={gameStart} />
       {/* <hr /> */}
       <div className="circle-wrapper" >
         <div className="circle-container" style={{ width: circleRadius * 2, height: circleRadius * 2 }} ref={circleRef}>
@@ -324,7 +405,7 @@ const App = () => {
               onClick={() => checkAnswer()}
             >Gönder
             </button>)}
-          <p>Puan: {score}{currentLetterIndex}</p>
+          <p>Puan: {score}</p>
           {isVisible && (
             <p className="fa-regular fa-clock" style={{ cursor: "pointer" }}>
               {minutes}:{seconds}</p>)}

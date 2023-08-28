@@ -136,6 +136,30 @@ a {
   transform: translate(-50%, -50%);
 }
 
+.designBy {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  
+}
+.fa-brands{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333333;
+}
+
+.designByText {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333333;
+}
+
 .circle-inner {
   width: 100px;
   height: 100px;
@@ -179,21 +203,21 @@ a {
   background-color: #3dd300;
   color: white;
   animation: rotate 2s linear infinite;
-  animation-iteration-count: 10;
+  animation-iteration-count: 1;
 }
 
 .wrong {
   background-color: #d30000;
   color: white;
   animation: rotate 2s linear infinite;
-  animation-iteration-count: 10;
+  animation-iteration-count: 1;
 }
 
 .skipped {
   background-color: #f7b500;
   color: white;
   animation: rotate 2s linear infinite;
-  animation-iteration-count: 10;
+  animation-iteration-count: 1;
 }
 
 @keyframes rotate {

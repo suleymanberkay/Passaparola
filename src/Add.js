@@ -6,11 +6,9 @@ import { useNavigate } from 'react-router-dom';
 import Login from './Components/Login';
 
 
-const TURKISH_LETTERS = ['A', 'B', 'C'];
-//, 'Ç','D', 'E', 'F', 'G', 'H', 'I','İ', 'J', 'K', 'L', 'M', 'N', 'O','Ö', 'P', 'R', 'S', 'T', 'U', 'Ü','V', 'Y', 'Z'
+const TURKISH_LETTERS = ['A', 'B', 'C', 'Ç','D', 'E', 'F', 'G', 'H', 'I','İ', 'J', 'K', 'L', 'M', 'N', 'O','Ö', 'P', 'R', 'S', 'T', 'U', 'Ü','V', 'Y', 'Z'];
 const Add = () => {
   const [openLogin, setOpenLogin] = useState(true);
-
   const navigate = useNavigate();
   const handleGoBack = () => {
     //window.history.back();
@@ -26,7 +24,7 @@ const Add = () => {
   const customDocID = new Date();
   let date = "" + customDocID.getFullYear() +
     ((customDocID.getMonth() + 1).toString().length === 1 ? "0" + (customDocID.getMonth() + 1) : (customDocID.getMonth() + 1)) +
-    ((customDocID.getDate()).toString().length === 1 ? "0" + (customDocID.getDate()) : (customDocID.getDate()));
+    ((customDocID.getDate()+1).toString().length === 1 ? "0" + (customDocID.getDate()+1) : (customDocID.getDate()+1));
   const collectionRef = collection(db, "DailyQA");
 
 

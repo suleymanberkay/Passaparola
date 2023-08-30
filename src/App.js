@@ -334,21 +334,15 @@ const App = () => {
       checkAnswer();
     }
   };
-  function resetIsPlayed() {
-    localStorage.setItem('isPlayed', false);
-  }
   
-  const isPlayed = localStorage.getItem('isPlayed');
-  
+  const isPlayed = ()=>{
   if (isPlayed) {
-    if (remainingHours === 0 && remainingMinutes === 0 && remainingSecond === 0) {
+    if (remainingHours === 0 && remainingMinutes === 0) {
+
       localStorage.setItem('isPlayed', false);
     } else {
       return (
         <div>
-          <div className='designBy'>
-            <p className='designByText'>Tekrar oynayabilmeniz için geri kalan süre: {remainingHours} : {remainingMinutes} : {remainingSecond}</p>
-          </div>
           <div className='designBy'>
             <p className='designByText'>Süleyman Berkay Yılmaz tarafından tasarlandı</p>
             <i class="fa-brands fa-linkedin">www.linkedin.com/in/suleymanberkayyilmaz</i>
@@ -358,14 +352,12 @@ const App = () => {
         </div>
       )
     }
-    
-  
-  const now = new Date();
-  const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0);
-  const timeUntilMidnight = midnight - now;
-  
-  setTimeout(resetIsPlayed, timeUntilMidnight);
-}
+    setInterval(isPlayed, 1000);
+    window.onload = isPlayed;
+
+
+
+  }}
 
 
 

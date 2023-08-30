@@ -49,7 +49,7 @@ const Modal = ({ closeModal, correctCount, wrongCount, passedCount, answersStatu
               </div>
               <div className='footer'>
                 <button
-                  onClick={() => { closeModal(false); localStorage.setItem('isPlayed', true) }} id='cancelBtn'
+                  onClick={() => { closeModal(false); }} id='cancelBtn'
                 >Cancel</button>
               </div>
             </div>

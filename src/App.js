@@ -334,10 +334,14 @@ const App = () => {
       checkAnswer();
     }
   };
+  function resetIsPlayed() {
+    localStorage.setItem('isPlayed', false);
+  }
+  
   const isPlayed = localStorage.getItem('isPlayed');
+  
   if (isPlayed) {
-    if (remainingHours === 0 && remainingMinutes === 0) {
-
+    if (remainingHours === 0 && remainingMinutes === 0 && remainingSecond === 0) {
       localStorage.setItem('isPlayed', false);
     } else {
       return (
@@ -354,12 +358,14 @@ const App = () => {
         </div>
       )
     }
-    setInterval(isPlayed, 1000);
-    window.onload = isPlayed;
-
-
-
-  }
+    
+  
+  const now = new Date();
+  const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0);
+  const timeUntilMidnight = midnight - now;
+  
+  setTimeout(resetIsPlayed, timeUntilMidnight);
+}
 
 
 

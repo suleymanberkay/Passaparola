@@ -335,29 +335,29 @@ const App = () => {
     }
   };
   
-  const isPlayed = ()=>{
-  if (isPlayed) {
-    if (remainingHours === 0 && remainingMinutes === 0) {
+  // const isPlayed = ()=>{
+  // if (isPlayed) {
+  //   if (remainingHours === 0 && remainingMinutes === 0) {
 
-      localStorage.setItem('isPlayed', false);
-    } else {
-      return (
-        <div>
-          <div className='designBy'>
-            <p className='designByText'>Süleyman Berkay Yılmaz tarafından tasarlandı</p>
-            <i class="fa-brands fa-linkedin">www.linkedin.com/in/suleymanberkayyilmaz</i>
-            <i class="fa-brands fa-square-instagram">@slymnylmz14</i>
-            <i class="fa-brands fa-square-twitter">@slymnylmz14</i>
-          </div>
-        </div>
-      )
-    }
-    setInterval(isPlayed, 1000);
-    window.onload = isPlayed;
+  //     localStorage.setItem('isPlayed', false);
+  //   } else {
+  //     return (
+  //       <div>
+  //         <div className='designBy'>
+  //           <p className='designByText'>Süleyman Berkay Yılmaz tarafından tasarlandı</p>
+  //           <i class="fa-brands fa-linkedin">www.linkedin.com/in/suleymanberkayyilmaz</i>
+  //           <i class="fa-brands fa-square-instagram">@slymnylmz14</i>
+  //           <i class="fa-brands fa-square-twitter">@slymnylmz14</i>
+  //         </div>
+  //       </div>
+  //     )
+  //   }
+  //   setInterval(isPlayed, 1000);
+  //   window.onload = isPlayed;
 
 
 
-  }}
+  // }}
 
 
 

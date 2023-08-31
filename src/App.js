@@ -131,7 +131,7 @@ const App = () => {
 
   }, [gameStart, timer, correctCount, data.length, wrongCount]);
 
-  const handleGetData = async (props) => {
+  const handleGetData = async () => {
     const docRef = doc(db, "DailyQA", date);
     const datafromdb = await getDoc(docRef);
     setLetters(datafromdb.data().data.map((item) => {
@@ -148,18 +148,6 @@ const App = () => {
     return data[currentLetterIndex]?.question;
   };
 
-  // const isLetterStored = () => {
-
-
-  //   Object.keys(answersStatus).forEach(element => {
-  //     if (element === letters[currentLetterIndex] && answersStatus[element] === 'skipped') {
-  //       return true;
-  //     }
-  //     else {
-  //       return false;
-  //     }
-  //   });
-  // }
 
   const [skippedLetters, setSkippedLetters] = useState([]);
   const [firstRoundCompleted, setFirstRoundCompleted] = useState(false);
@@ -223,63 +211,9 @@ const App = () => {
     setUserAnswer('');
   };
 
-
-
-
-
-
-
-
-
-
-
-  // const checkAnswer = () => {
-
-
-  //   const userAnswerLowerCase = (typeof userAnswer === 'string') ? userAnswer.toLowerCase() : '';
-  //   const correctAnswer = getAnswer();
-  //   if (userAnswerLowerCase === correctAnswer?.toLowerCase()) {
-  //     setAnswersStatus((prevStatus) => ({
-  //       ...prevStatus,
-  //       [letters[currentLetterIndex]]: 'correct',
-  //     }));
-  //     setCorrectCount((prevStatus) => (prevStatus + 1));
-  //     setScore(score + 10);
-  //   } else if (userAnswerLowerCase === 'pas') {
-  //     setAnswersStatus((prevStatus) => ({
-  //       ...prevStatus,
-  //       [letters[currentLetterIndex]]: 'skipped',
-  //     }));
-  //     setPassedCount((prevStatus) => (prevStatus + 1));
-  //   }
-  //   // if (userAnswerLowerCase === '') {
-  //   // setAnswersStatus((prevStatus) => ({
-  //   //   ...prevStatus,
-  //   //   [letters[currentLetterIndex]]: 'skipped',
-  //   // }));
-  //   // setPassedCount((prevStatus) => (prevStatus + 1));
-  //   // }
-  //   else {
-  //     setAnswersStatus((prevStatus) => ({
-  //       ...prevStatus,
-  //       [letters[currentLetterIndex]]: 'wrong',
-  //     }));
-  //     setWrongCount((prevStatus) => (prevStatus + 1));
-  //     setScore(score - 10);
-  //   }
-
-  //   //   if(correctCount+wrongCount===data.length){  
-  //   setCurrentLetterIndex((prevStatus) =>
-  //     (prevStatus + 1) % data.length);
-  //   // }
-
-
-  //   setUserAnswer('');
-  // }
   useEffect(() => {
     handleGetData();
-  }, [handleGetData()])
-
+  }, [handleGetData])
 
   const findIndex = (item) => {
     const lettersIndex = 'ABCÇDEFGHIİJKLMNOÖPRSTUÜVYZ';
@@ -334,7 +268,7 @@ const App = () => {
       checkAnswer();
     }
   };
-  
+
   // const isPlayed = ()=>{
   // if (isPlayed) {
   //   if (remainingHours === 0 && remainingMinutes === 0) {

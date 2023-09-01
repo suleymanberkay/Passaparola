@@ -31,7 +31,7 @@ const App = () => {
   const [currentLetterIndex, setCurrentLetterIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [userAnswer, setUserAnswer] = useState('');
-  const [timer, setTimer] = useState(5);
+  const [timer, setTimer] = useState(300);
   const [answersStatus, setAnswersStatus] = useState({});
   const isMobile = window.innerWidth <= 768;
   const circleRadius = isMobile ? circleRadiusMobile : circleRadiusDesktop;

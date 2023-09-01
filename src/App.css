@@ -229,6 +229,43 @@ a {
     transform: rotateY(360deg);
   }
 }
+@media (max-width: 576px) and (min-height: 750){
+  .circle-wrapper {
+    align-items: flex-start;
+    margin-top: 50px;
+  }
+
+  .circle-container {
+    padding: 10px;
+  }
+
+  .input-container {
+    top: 80% !important;
+    width: 70%;
+  }
+
+  .circle-inner {
+    padding: 10px;
+
+  }
+
+  .circle-component {
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+  }
+
+  .current {
+    width: 20px !important;
+    height: 20px !important;
+    border: 2px solid black !important;
+
+  }
+
+  .not-current {
+    border: 1px solid grey !important;
+  }
+}
 
 @media (max-width: 576px) {
   .circle-wrapper {

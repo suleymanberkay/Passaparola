@@ -111,7 +111,7 @@ const App = () => {
   useEffect(() => {
     if (gameStart) {
       const interval = setInterval(() => {
-        if ((timer === 0 || data.length > 0) || (wrongCount + correctCount === data.length)) {
+        if ((timer === 0 || data.length > 0) || (wrongCount + correctCount === 27)) {
           setOpenModal(true);
           setIsInputDisabled(true);
           setIsVisible(false);

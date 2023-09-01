@@ -31,7 +31,7 @@ const App = () => {
   const [currentLetterIndex, setCurrentLetterIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [userAnswer, setUserAnswer] = useState('');
-  const [timer, setTimer] = useState(300);
+  const [timer, setTimer] = useState(5);
   const [answersStatus, setAnswersStatus] = useState({});
   const isMobile = window.innerWidth <= 768;
   const circleRadius = isMobile ? circleRadiusMobile : circleRadiusDesktop;
@@ -109,9 +109,9 @@ const App = () => {
 
 
   useEffect(() => {
-    if (gameStart) {
+    if (gameStart&&data.length > 0) {
       const interval = setInterval(() => {
-        if ((timer === 0 || data.length > 0) || (wrongCount + correctCount === 27)) {
+        if (timer === 0 || (wrongCount + correctCount) === 27 ) {
           setOpenModal(true);
           setIsInputDisabled(true);
           setIsVisible(false);

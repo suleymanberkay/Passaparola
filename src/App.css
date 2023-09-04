@@ -142,7 +142,6 @@ a {
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
   text-align: center;
-
 }
 
 .fa-brands {
@@ -238,7 +237,7 @@ a {
   }
 
   .question {
-    top: 80% !important;
+    top: 85% !important;
   }
 
   .circle-container {
@@ -246,7 +245,7 @@ a {
   }
 
   .input-container {
-    top: 80% !important;
+    top: 85% !important;
     width: 70%;
   }
 
@@ -283,12 +282,10 @@ a {
     padding: 10px;
   }
 
-  .question {
-    top: 80% !important;
-  }
+  
 
   .input-container {
-    top: 75% !important;
+    top: 85%;
     width: 70%;
   }
 

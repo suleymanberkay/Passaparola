@@ -317,12 +317,11 @@ const App = () => {
           ))}
         </div>
       </div>
+      
       <div className='input-container'>
-        <div className="parola-content">
-          <p className='question'>Soru:{getQuestion()}
-          </p>
+      <div className="parola-content">
+        <p className='question'>Soru:{getQuestion()} </p>
         </div>
-        <div>
           {/*üm */}
           <input className='input-comp'
             type="text"
@@ -344,7 +343,7 @@ const App = () => {
           <button className='confirmBtn'
             onClick={gameFinished}
           >Oyunu bitir!</button>
-        </div>
+        
       </div>
 
       {openModal && <Modal answersStatus={answersStatus} data={data} closeModal={setOpenModal} correctCount={correctCount} passedCount={passedCount} wrongCount={wrongCount} />}

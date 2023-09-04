@@ -280,8 +280,8 @@ a {
   }
 
   .input-container {
-    height: 100%;
-    top: 80%;
+    /* height: 100%; */
+    top: 85%;
     width: 75%;
   }
 

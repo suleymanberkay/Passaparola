@@ -236,9 +236,11 @@ a {
     align-items: flex-start;
     margin-top: 50px;
   }
-  .question{
-    top:80% !important;
+
+  .question {
+    top: 80% !important;
   }
+
   .circle-container {
     padding: 10px;
   }
@@ -279,6 +281,10 @@ a {
 
   .circle-container {
     padding: 10px;
+  }
+
+  .question {
+    top: 80% !important;
   }
 
   .input-container {

@@ -52,6 +52,7 @@ a {
 }
 
 .confirmBtn {
+  position: relative;
   width: 150px;
   height: 45px;
   margin: 10px;
@@ -236,17 +237,13 @@ a {
     margin-top: 50px;
   }
 
-  .question {
-    top: 85% !important;
-  }
-
   .circle-container {
     padding: 10px;
   }
 
   .input-container {
     top: 85% !important;
-    width: 70%;
+    width: 75%;
   }
 
   .circle-inner {
@@ -282,16 +279,28 @@ a {
     padding: 10px;
   }
 
-  
-
   .input-container {
-    top: 85%;
-    width: 70%;
+    height: 100%;
+    top: 80%;
+    width: 75%;
   }
 
   .circle-inner {
     padding: 10px;
 
+  }
+
+  .input-comp {
+    top: 40%;
+  }
+
+  .button-container {
+    top: 40%;
+
+  }
+
+  .confirmBtn {
+    top: 30%;
   }
 
   .circle-component {

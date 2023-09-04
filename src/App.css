@@ -231,7 +231,7 @@ a {
   }
 }
 
-@media (max-width: 576px) and (min-height: 750) {
+/* @media (max-width: 576px) and (min-height: 750) {
   .circle-wrapper {
     align-items: flex-start;
     margin-top: 50px;
@@ -267,7 +267,7 @@ a {
   .not-current {
     border: 1px solid grey !important;
   }
-}
+} */
 
 @media (max-width: 576px) {
   .circle-wrapper {

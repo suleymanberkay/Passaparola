@@ -24,7 +24,7 @@ const Add = () => {
   const customDocID = new Date();
   let date = "" + customDocID.getFullYear() +
     ((customDocID.getMonth() + 1).toString().length === 1 ? "0" + (customDocID.getMonth() + 1) : (customDocID.getMonth() + 1)) +
-    ((customDocID.getDate()+1).toString().length === 1 ? "0" + (customDocID.getDate()+1) : (customDocID.getDate()+1));
+    ((customDocID.getDate()).toString().length === 1 ? "0" + (customDocID.getDate()) : (customDocID.getDate()));
   const collectionRef = collection(db, "DailyQA");
 
 
